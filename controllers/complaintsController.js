@@ -1,8 +1,16 @@
-import { getDB } from '../db/connect.js';
+import { insertComplaint, getAllComplaints } from '../models/complaint.model.js';
 
 export async function submitComplaint(req, res) {
-  const { category, content } = req.body;
-  const db = getDB();
-  await db.collection('complaintsDB').insertOne({category,content,date: new Date()});
-  res.json({ success: true, message: 'התלונה התקבלה' });
+  const { category, message } = req.body;
+  await insertComplaint({ category, content: message });
+  res.json({message: 'התלונה התקבלה' });
+}
+
+export async function adminComplaint(req, res) {
+  const { password } = req.body;
+  if (password !== process.env.ADMIN_PASSWORD) {
+    return res.status(401).json({ message: 'סיסמה שגויה' });
+  }
+  const complaints = await getAllComplaints();
+  res.json({complaints });
 }
