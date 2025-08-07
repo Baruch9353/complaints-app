@@ -1,20 +1,8 @@
-export function submitComplaint(req, res) {
-  const { category, message } = req.body;
-  console.log(`Complaint received: [${category}] ${message}`);
+import { getDB } from '../db/connect.js';
 
-  res.send(`
-    <h2>תודה על שליחת התלונה!</h2>
-    <a href="/">חזרה לדף הבית</a>
-  `);
-}
-
-export function adminLogin(req, res) {
-  const { password } = req.body;
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '1234';
-
-  if (password === ADMIN_PASSWORD) {
-    res.send(`<h2>ברוך הבא, מפקד!</h2><p>כאן יוצגו התלונות בעתיד.</p>`);
-  } else {
-    res.send(`<h2>סיסמה שגויה!</h2><a href="/">נסה שוב</a>`);
-  }
+export async function submitComplaint(req, res) {
+  const { category, content } = req.body;
+  const db = getDB();
+  await db.collection('complaintsDB').insertOne({category,content,date: new Date()});
+  res.json({ success: true, message: 'התלונה התקבלה' });
 }
