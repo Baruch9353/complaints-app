@@ -9,6 +9,7 @@ let db;
 
 const client = new MongoClient(MONGO_URI);
 
+// Connect to MongoDB and store the database instance
 export async function connectDB() {
   try {
     await client.connect();
@@ -21,6 +22,7 @@ export async function connectDB() {
 
 await connectDB();
 
+// Return the current database instance
 export function getDB() {
   return db;
 }
