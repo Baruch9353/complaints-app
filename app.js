@@ -11,6 +11,11 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use('/', router);
 
+// Error handling for undefined routes
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
 // Start server
 const PORT = process.env.PORT || 3000;
 

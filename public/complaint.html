@@ -10,9 +10,12 @@
 
 <body>
     <div class="container">
+        <!-- Page main heading -->
         <h1>שליחת תלונה אנונימית</h1>
 
+        <!-- Complaint submission form -->
         <form action="/submit" method="POST">
+            <!-- Complaint category selection -->
             <label for="category">תחום התלונה:</label>
             <select id="category" name="category" required>
                 <option value="אוכל">אוכל</option>
@@ -21,9 +24,11 @@
                 <option value="אחר">אחר</option>
             </select>
 
+            <!-- Complaint message textarea -->
             <label for="message">פרטי התלונה:</label>
             <textarea id="message" name="message" rows="6" required></textarea>
 
+            <!-- Form submit button -->
             <button type="submit">שלח תלונה</button>
         </form>
     </div>

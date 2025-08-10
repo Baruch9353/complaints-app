@@ -3,7 +3,10 @@ import { submitComplaint, adminComplaint } from '../controllers/complaintsContro
 
 const router = express.Router();
 
+// Route for submitting a new complaint
 router.post('/submit', submitComplaint);
+
+// Route for admin to view complaints
 router.post('/admin', adminComplaint);
 
 export default router;
